@@ -1,0 +1,65 @@
+package com.saad.imagegallary.repository
+
+import androidx.lifecycle.LiveData
+import androidx.lifecycle.MutableLiveData
+import com.saad.imagegallary.models.Hit
+import com.saad.imagegallary.models.ImageList
+import com.saad.imagegallary.retrofit.imageService
+import com.saad.imagegallary.room.FavoriteDao
+import com.saad.imagegallary.room.FavoriteEntity
+import com.saad.imagegallary.room.ImagesDao
+import com.saad.imagegallary.utils.ApplicationContextProvider
+import com.saad.imagegallary.utils.NetworkUtils
+import javax.inject.Inject
+import javax.inject.Singleton
+
+@Singleton
+class repository @Inject constructor(
+    private val imageService: imageService,
+    private val favoriteDao: FavoriteDao,
+    private val imagesDao: ImagesDao,
+    applicationContextProvider: ApplicationContextProvider
+) {
+    private val imagesLiveData = MutableLiveData<ImageList>()
+    val images: LiveData<ImageList>
+        get() = imagesLiveData
+    val context = applicationContextProvider.getApplicationContext()
+    private val favImageLiveData = MutableLiveData<FavoriteEntity>()
+    val favImage: LiveData<FavoriteEntity>
+        get() = favImageLiveData
+
+    suspend fun getImagesfromDb(): List<Hit> {
+        return imagesDao.getImages()
+    }
+
+    suspend fun deleteImagesfromDb(images: List<Hit>) {
+        return imagesDao.deleteAll(images)
+    }
+
+    suspend fun getImages(page: Int, per_page: Int) {
+
+        if (NetworkUtils.isInternetAvailable(context)) {
+            val result = imageService.getImages(page, per_page)
+            if (result?.body() != null) {
+                imagesDao.addImages(result.body()!!.hits)
+                imagesLiveData.postValue(result.body())
+            }
+        } else {
+            val images = imagesDao.getImages()
+            val imageList = ImageList(images, 1, 1)
+            imagesLiveData.postValue(imageList)
+        }
+    }
+
+    suspend fun addFavorite(favImage: FavoriteEntity) {
+        return favoriteDao.addFavorite(favImage)
+    }
+
+    fun getAllFavorite(): LiveData<List<FavoriteEntity>> {
+        return favoriteDao.getFavoriteImages()
+    }
+
+    suspend fun deleteFavorite(delFavImg: FavoriteEntity) {
+        return favoriteDao.deleteFavorite(delFavImg)
+    }
+}
