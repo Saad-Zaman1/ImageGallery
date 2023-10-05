@@ -24,3 +24,8 @@ The Image Gallery App is built using various technologies and libraries to enhan
 
 -  **MVVM Architecture**: The app follows the MVVM (Model-View-ViewModel) architecture pattern, separating the UI logic from the data handling and business logic. This ensures maintainability and testability of the codebase.
 
+ <p align="center">
+  <img src="https://github.com/Saad-Zaman1/ImageGallary/assets/88928048/0760e6b9-1fd2-4f3f-8559-980be9c1e670" alt="All Images" width="300" />
+    <img src="https://github.com/Saad-Zaman1/ImageGallary/assets/88928048/6aff0c10-7d23-4eb7-aa5e-0d920c648758" alt="All Images" width="300" />
+</p>
+
