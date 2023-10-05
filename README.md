@@ -21,3 +21,6 @@ The Image Gallery App is built using various technologies and libraries to enhan
 - **Retrofit**: Retrofit is utilized for making network requests and fetching images from remote servers. It helps in retrieving the latest images to keep the gallery up-to-date.
 
 - **Dependency Injection (Hilt)**: Hilt is used for dependency injection, making the codebase more modular and maintainable. It simplifies the management of object creation and scope, enhancing overall code quality.
+
+-  **MVVM Architecture**: The app follows the MVVM (Model-View-ViewModel) architecture pattern, separating the UI logic from the data handling and business logic. This ensures maintainability and testability of the codebase.
+
