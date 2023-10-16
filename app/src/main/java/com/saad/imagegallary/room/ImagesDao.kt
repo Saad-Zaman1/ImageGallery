@@ -1,5 +1,6 @@
 package com.saad.imagegallary.room
 
+import androidx.lifecycle.LiveData
 import androidx.room.Dao
 import androidx.room.Delete
 import androidx.room.Insert
@@ -20,4 +21,6 @@ interface ImagesDao {
     suspend fun deleteAll(images: List<Hit>)
 
 
+    @Query("Select * from images as i join favorite as f on i.largeImageURL = f.largeImageURL")
+    fun getFav(): LiveData<List<Hit>>
 }

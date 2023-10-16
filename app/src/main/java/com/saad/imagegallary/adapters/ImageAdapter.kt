@@ -13,6 +13,7 @@ import com.saad.imagegallary.models.Hit
 import com.saad.imagegallary.room.FavoriteEntity
 
 class imagesAdapter(
+    private var favIconFill: List<Hit>,
     private var imageList: List<Hit>,
     private var favList: List<FavoriteEntity>,
     private val isFavorite: Boolean,
@@ -63,6 +64,8 @@ class imagesAdapter(
 
     override fun onBindViewHolder(holder: myViewHolder, position: Int) {
         if (isFavorite) {
+//            val favo = favIconFill[position]
+//            Log.i("favoooo", "${favo.views}")
             holder.binding.ivOverlayIcon.setImageResource(R.drawable.baseline_favorite_24)
             val favorite = favList[position]
             Glide.with(holder.itemView.context).load(favorite.largeImageURL)
@@ -71,13 +74,24 @@ class imagesAdapter(
             holder.binding.tvComment.text = favorite.comments.toString()
             holder.binding.tvSee.text = favorite.views.toString()
         } else {
+//            val favroit = favIconFill?.get(position)
             val images = imageList[position]
+
+//            if (favroit?.largeImageURL == images.largeImageURL) {
+//                holder.binding.ivOverlayIcon.setImageResource(R.drawable.baseline_favorite_24)
+//                Glide.with(holder.itemView.context).load(images.largeImageURL)
+//                    .into(holder.binding.ivThumbnail)
+//                holder.binding.tvLike.text = images.likes.toString()
+//                holder.binding.tvComment.text = images.comments.toString()
+//                holder.binding.tvSee.text = images.views.toString()
+//            } else {
             Glide.with(holder.itemView.context).load(images.largeImageURL)
                 .into(holder.binding.ivThumbnail)
             holder.binding.tvLike.text = images.likes.toString()
             holder.binding.tvComment.text = images.comments.toString()
             holder.binding.tvSee.text = images.views.toString()
         }
+//        }
 
     }
 
@@ -90,5 +104,10 @@ class imagesAdapter(
         imageList = newData
         notifyDataSetChanged()
     }
+
+//    fun updateFavData(newData: List<Hit>) {
+//        favIconFill = newData
+//        notifyDataSetChanged()
+//    }
 
 }

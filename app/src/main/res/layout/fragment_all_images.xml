@@ -5,6 +5,10 @@
 
     <data>
 
+        <variable
+            name="viewModel"
+            type="com.saad.imagegallary.viewModels.ImagesViewModel" />
+
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
@@ -13,13 +17,168 @@
         tools:context=".fragments.AllImagesFragment">
 
         <!-- RecyclerView -->
+        <HorizontalScrollView
+            android:id="@+id/categoryScrollView"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_margin="10dp"
+            android:scrollbars="none"
+            android:overScrollMode="never"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent">
+
+            <!-- Horizontal LinearLayout for Category Items -->
+            <LinearLayout
+                android:id="@+id/categoryLayout"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="10dp"
+                android:orientation="horizontal">
+
+                <!-- Category Items (Add more as needed) -->
+                <TextView
+                    android:id="@+id/category_all"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textColor="@color/black"
+                    android:textStyle="bold"
+                    android:text="All"
+                    android:tag=""
+                    android:state_selected="true"
+                    android:paddingHorizontal="19dp"
+                    android:paddingVertical="8dp"
+                    android:clickable="true"
+                    android:focusable="true"
+                    android:background="@drawable/category_selected_background" />
+
+                <TextView
+                    android:id="@+id/category_fashion"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textStyle="bold"
+                    android:text="Fashion"
+                    android:layout_marginStart="8dp"
+                    android:tag="fashion"
+                    android:padding="8dp"
+                    android:clickable="true"
+                    android:focusable="true"
+                    android:background="@drawable/category_selected_background" />
+
+                <TextView
+                    android:id="@+id/category_nature"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="8dp"
+
+                    android:text="Nature"
+                    android:tag="nature"
+                    android:textStyle="bold"
+                    android:padding="8dp"
+                    android:clickable="true"
+                    android:focusable="true"
+                    android:background="@drawable/category_selected_background"
+                    android:onClick="onCategoryClick" />
+
+                <TextView
+                    android:id="@+id/category_computer"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="8dp"
+
+                    android:text="Computer"
+                    android:tag="computer"
+                    android:textStyle="bold"
+                    android:padding="8dp"
+                    android:clickable="true"
+                    android:focusable="true"
+                    android:background="@drawable/category_selected_background"
+                    android:onClick="onCategoryClick" />
+                <!-- Add more categories here -->
+                <TextView
+                    android:id="@+id/category_food"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="8dp"
+
+                    android:text="Food"
+                    android:tag="food"
+                    android:textStyle="bold"
+                    android:padding="8dp"
+                    android:clickable="true"
+                    android:focusable="true"
+                    android:background="@drawable/category_selected_background"
+                    android:onClick="onCategoryClick" />
+
+                <TextView
+                    android:id="@+id/category_business"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="8dp"
+
+                    android:text="Business"
+                    android:tag="business"
+                    android:textStyle="bold"
+                    android:padding="8dp"
+                    android:clickable="true"
+                    android:focusable="true"
+                    android:background="@drawable/category_selected_background"
+                    android:onClick="onCategoryClick" />
+
+                <TextView
+                    android:id="@+id/category_music"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="8dp"
+
+                    android:text="Music"
+                    android:tag="music"
+                    android:textStyle="bold"
+                    android:padding="8dp"
+                    android:clickable="true"
+                    android:focusable="true"
+                    android:background="@drawable/category_selected_background"
+                    android:onClick="onCategoryClick" />
+
+                <TextView
+                    android:id="@+id/category_science"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="8dp"
+
+                    android:text="Science"
+                    android:tag="science"
+                    android:textStyle="bold"
+                    android:padding="8dp"
+                    android:clickable="true"
+                    android:focusable="true"
+                    android:background="@drawable/category_selected_background"
+                    android:onClick="onCategoryClick" />
+
+                <TextView
+                    android:id="@+id/category_places"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="8dp"
+
+                    android:text="Places"
+                    android:tag="places"
+                    android:textStyle="bold"
+                    android:padding="8dp"
+                    android:clickable="true"
+                    android:focusable="true"
+                    android:background="@drawable/category_selected_background"
+                    android:onClick="onCategoryClick" />
+
+            </LinearLayout>
+        </HorizontalScrollView>
 
         <include
             android:id="@+id/recyclerView"
             layout="@layout/recycler_view"
             android:layout_width="0dp"
             android:layout_height="0dp"
-            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/categoryScrollView"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintEnd_toEndOf="parent"

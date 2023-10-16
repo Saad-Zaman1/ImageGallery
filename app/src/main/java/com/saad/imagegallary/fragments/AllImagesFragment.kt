@@ -1,5 +1,6 @@
 package com.saad.imagegallary.fragments
 
+import android.graphics.Color
 import android.os.Bundle
 import android.util.Log
 import android.view.LayoutInflater
@@ -25,6 +26,7 @@ import kotlinx.coroutines.launch
 class AllImagesFragment : Fragment(), onClickFavroiteInterface {
     private lateinit var binding: FragmentAllImagesBinding
 
+    private lateinit var adapter: imagesAdapter
     val imageViewModel: ImagesViewModel by viewModels<ImagesViewModel>()
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -40,16 +42,22 @@ class AllImagesFragment : Fragment(), onClickFavroiteInterface {
 
         val recyclerView: RecyclerView = binding.recyclerView.findViewById(R.id.recycler_reuse)
 
-        val adapter = imagesAdapter(
+        adapter = imagesAdapter(
+            emptyList(),
             emptyList(),
             emptyList(),
             false,
             this
         )
+//        imageViewModel.getFav().observe(viewLifecycleOwner) {
+//            adapter.updateFavData(it)
+//        }
+
         imageViewModel.images.observe(viewLifecycleOwner) {
             adapter.updateDataImages(it.hits)
             Log.i("MyData", it.toString())
         }
+
         val spanCount = 2
         val layoutManager = GridLayoutManager(requireContext(), spanCount)
         recyclerView.layoutManager = layoutManager
@@ -58,15 +66,71 @@ class AllImagesFragment : Fragment(), onClickFavroiteInterface {
 
         layoutManager.spanSizeLookup = object : GridLayoutManager.SpanSizeLookup() {
             override fun getSpanSize(position: Int): Int {
-                val availableSpans = layoutManager.spanCount
                 return if ((position % 3) == 2) 2 else 1
             }
+        }
+
+        imageViewModel.getSelectedCategory().observe(viewLifecycleOwner) { selectedCategory ->
+//            Toast.makeText(requireContext(), " $selectedCategory", Toast.LENGTH_SHORT).show()
+            CoroutineScope(Dispatchers.IO).launch {
+                imageViewModel.getImagesByCatagories(1, 20, selectedCategory)
+            }
+
+            Log.i("Tagofselected", "$selectedCategory")
+
+            val categoryTextViews = arrayOf(
+                binding.categoryFashion,
+                binding.categoryNature,
+                binding.categoryComputer,
+                binding.categoryBusiness,
+                binding.categoryFood,
+                binding.categoryMusic,
+                binding.categoryPlaces,
+                binding.categoryScience
+
+            )
+
+            categoryTextViews.forEach { textView ->
+                if (textView.tag == selectedCategory) {
+                    textView.setTextColor(Color.WHITE)
+                    textView.isSelected = true
+                } else {
+                    textView.setTextColor(Color.BLACK)
+                    textView.isSelected = false
+                }
+            }
+        }
+        binding.categoryAll.setOnClickListener {
+            imageViewModel.setSelectedCategory("")
+        }
+        binding.categoryFashion.setOnClickListener {
+            imageViewModel.setSelectedCategory("fashion")
+        }
+        binding.categoryNature.setOnClickListener {
+            imageViewModel.setSelectedCategory("nature")
+        }
+        binding.categoryMusic.setOnClickListener {
+            imageViewModel.setSelectedCategory("music")
+        }
+        binding.categoryScience.setOnClickListener {
+            imageViewModel.setSelectedCategory("science")
+        }
+        binding.categoryComputer.setOnClickListener {
+            imageViewModel.setSelectedCategory("computer")
+        }
+        binding.categoryBusiness.setOnClickListener {
+            imageViewModel.setSelectedCategory("business")
+        }
+        binding.categoryPlaces.setOnClickListener {
+            imageViewModel.setSelectedCategory("places")
+        }
+        binding.categoryFood.setOnClickListener {
+            imageViewModel.setSelectedCategory("food")
         }
     }
 
     override fun onClick(fav: FavoriteEntity) {
         CoroutineScope(Dispatchers.IO).launch {
-
             imageViewModel.addFaviorite(fav)
         }
     }

@@ -11,5 +11,7 @@ interface imageService {
     suspend fun getImages(
         @Query("page") page: Int,
         @Query("per_page") per_page: Int,
+        @Query("category") category: String,
     ): Response<ImageList>
+
 }

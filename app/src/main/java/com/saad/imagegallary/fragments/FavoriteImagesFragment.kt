@@ -45,6 +45,7 @@ class FavoriteImagesFragment : Fragment(), onClickFavroiteInterface {
         val adapter = imagesAdapter(
             emptyList(),
             emptyList(),
+            emptyList(),
             true,
             this
         )
