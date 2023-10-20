@@ -1,6 +1,7 @@
 package com.saad.imagegallary.adapters
 
 
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView.Adapter
@@ -9,16 +10,18 @@ import com.bumptech.glide.Glide
 import com.saad.imagegallary.R
 import com.saad.imagegallary.databinding.HomeImagesViewBinding
 import com.saad.imagegallary.interfaces.onClickFavroiteInterface
+import com.saad.imagegallary.models.CustomFavoriteModel
 import com.saad.imagegallary.models.Hit
 import com.saad.imagegallary.room.FavoriteEntity
 
 class imagesAdapter(
-    private var favIconFill: List<Hit>,
+    private var favIconFill: List<CustomFavoriteModel>,
     private var imageList: List<Hit>,
     private var favList: List<FavoriteEntity>,
     private val isFavorite: Boolean,
-    private val clickFav: onClickFavroiteInterface
-) : Adapter<imagesAdapter.myViewHolder>() {
+    private val clickFav: onClickFavroiteInterface,
+
+    ) : Adapter<imagesAdapter.myViewHolder>() {
     inner class myViewHolder(val binding: HomeImagesViewBinding) : ViewHolder(binding.root) {
         init {
             if (isFavorite) {
@@ -27,16 +30,24 @@ class imagesAdapter(
                     clickFav.onClick(favList[position])
                 }
             } else {
-                binding.ivOverlayIcon.setOnClickListener {
-                    binding.ivOverlayIcon.setImageResource(R.drawable.baseline_favorite_24)
+                itemView.setOnClickListener {
                     val position = adapterPosition
+                    clickFav.onClickDetails(imageList[position])
+                    Log.i("Clicked", "inside recycler view all images")
+                }
+                binding.ivOverlayIcon.setOnClickListener {
+                    val position = adapterPosition
+                    binding.ivOverlayIcon.setImageResource(R.drawable.baseline_favorite_24)
                     val newFAvList = FavoriteEntity(
                         0,
+                        imageList[position].id,
                         imageList[position].largeImageURL,
                         imageList[position].previewURL,
                         imageList[position].comments,
                         imageList[position].likes,
-                        imageList[position].views
+                        imageList[position].views,
+                        imageList[position].downloads,
+                        imageList[position].tags
                     )
                     clickFav.onClick(newFAvList)
                 }
@@ -64,35 +75,27 @@ class imagesAdapter(
 
     override fun onBindViewHolder(holder: myViewHolder, position: Int) {
         if (isFavorite) {
-//            val favo = favIconFill[position]
-//            Log.i("favoooo", "${favo.views}")
             holder.binding.ivOverlayIcon.setImageResource(R.drawable.baseline_favorite_24)
             val favorite = favList[position]
             Glide.with(holder.itemView.context).load(favorite.largeImageURL)
+                .placeholder(R.drawable.baseline_photo_24)
                 .into(holder.binding.ivThumbnail)
             holder.binding.tvLike.text = favorite.likes.toString()
             holder.binding.tvComment.text = favorite.comments.toString()
             holder.binding.tvSee.text = favorite.views.toString()
         } else {
-//            val favroit = favIconFill?.get(position)
             val images = imageList[position]
-
-//            if (favroit?.largeImageURL == images.largeImageURL) {
+//            val iconFill = favIconFill[position]
+//            if (iconFill.id == images.id) {
 //                holder.binding.ivOverlayIcon.setImageResource(R.drawable.baseline_favorite_24)
-//                Glide.with(holder.itemView.context).load(images.largeImageURL)
-//                    .into(holder.binding.ivThumbnail)
-//                holder.binding.tvLike.text = images.likes.toString()
-//                holder.binding.tvComment.text = images.comments.toString()
-//                holder.binding.tvSee.text = images.views.toString()
-//            } else {
+//            }
             Glide.with(holder.itemView.context).load(images.largeImageURL)
+                .placeholder(R.drawable.baseline_photo_24)
                 .into(holder.binding.ivThumbnail)
             holder.binding.tvLike.text = images.likes.toString()
             holder.binding.tvComment.text = images.comments.toString()
             holder.binding.tvSee.text = images.views.toString()
         }
-//        }
-
     }
 
     fun updateDataFavorite(newData: List<FavoriteEntity>) {
@@ -105,9 +108,9 @@ class imagesAdapter(
         notifyDataSetChanged()
     }
 
-//    fun updateFavData(newData: List<Hit>) {
-//        favIconFill = newData
-//        notifyDataSetChanged()
-//    }
-
+    fun updateFavoriteList(newList: List<CustomFavoriteModel>) {
+        favIconFill = newList
+        Log.i("favIconFill", "$newList")
+        notifyDataSetChanged()
+    }
 }

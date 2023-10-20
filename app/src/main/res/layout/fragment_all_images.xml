@@ -12,6 +12,7 @@
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
+
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         tools:context=".fragments.AllImagesFragment">
@@ -27,6 +28,7 @@
             app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintEnd_toEndOf="parent">
+
 
             <!-- Horizontal LinearLayout for Category Items -->
             <LinearLayout
@@ -171,11 +173,25 @@
                     android:onClick="onCategoryClick" />
 
             </LinearLayout>
+
         </HorizontalScrollView>
+
+        <com.facebook.shimmer.ShimmerFrameLayout
+            android:id="@+id/shimmerLayout"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/categoryScrollView">
+
+            <include layout="@layout/shimmer_effect" />
+        </com.facebook.shimmer.ShimmerFrameLayout>
 
         <include
             android:id="@+id/recyclerView"
             layout="@layout/recycler_view"
+
             android:layout_width="0dp"
             android:layout_height="0dp"
             app:layout_constraintTop_toBottomOf="@+id/categoryScrollView"

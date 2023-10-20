@@ -4,7 +4,7 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.saad.imagegallary.models.Hit
+import com.saad.imagegallary.models.CustomFavoriteModel
 import com.saad.imagegallary.models.ImageList
 import com.saad.imagegallary.repository.repository
 import com.saad.imagegallary.room.FavoriteEntity
@@ -45,6 +45,10 @@ class ImagesViewModel @Inject constructor(
         }
     }
 
+    suspend fun checkFavorite(id: Int): FavoriteEntity {
+        return repository.checkFavorite(id)
+    }
+
     suspend fun getImagesByCatagories(page: Int, per_page: Int, category: String) {
         repository.getImages(page, per_page, category).collect { imageList ->
             repository.imagesLiveData.postValue(imageList)
@@ -66,7 +70,7 @@ class ImagesViewModel @Inject constructor(
         repository.addFavorite(fav)
     }
 
-    fun getFav(): LiveData<List<Hit>> {
+    fun getFav(): LiveData<List<CustomFavoriteModel>> {
         return repository.getFav()
     }
 

@@ -1,6 +1,7 @@
 package com.saad.imagegallary.fragments
 
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -13,6 +14,7 @@ import com.saad.imagegallary.R
 import com.saad.imagegallary.adapters.imagesAdapter
 import com.saad.imagegallary.databinding.FragmentFavoriteImagesBinding
 import com.saad.imagegallary.interfaces.onClickFavroiteInterface
+import com.saad.imagegallary.models.Hit
 import com.saad.imagegallary.room.FavoriteEntity
 import com.saad.imagegallary.viewModels.ImagesViewModel
 import dagger.hilt.android.AndroidEntryPoint
@@ -41,7 +43,7 @@ class FavoriteImagesFragment : Fragment(), onClickFavroiteInterface {
         super.onViewCreated(view, savedInstanceState)
 
         val recyclerView: RecyclerView =
-            binding.recyclerViewFavorite.findViewById(R.id.recycler_reuse)
+            binding.recyclerViewFavorite.recyclerReuse
         val adapter = imagesAdapter(
             emptyList(),
             emptyList(),
@@ -69,5 +71,9 @@ class FavoriteImagesFragment : Fragment(), onClickFavroiteInterface {
         CoroutineScope(Dispatchers.IO).launch {
             imageViewModel.deleteFavorite(fav)
         }
+    }
+
+    override fun onClickDetails(image: Hit) {
+        Log.i("Favorite", "data")
     }
 }

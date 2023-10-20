@@ -8,12 +8,12 @@ plugins {
 
 android {
     namespace = "com.saad.imagegallary"
-    compileSdk = 33
+    compileSdk = 34
 
     defaultConfig {
         applicationId = "com.saad.imagegallary"
         minSdk = 24
-        targetSdk = 33
+        targetSdk = 34
         versionCode = 1
         versionName = "1.0"
 
@@ -38,10 +38,13 @@ android {
     }
     buildFeatures {
         dataBinding = true
+        viewBinding = true
     }
 }
 
 dependencies {
+    implementation("androidx.navigation:navigation-fragment-ktx:2.7.4")
+    implementation("androidx.navigation:navigation-ui-ktx:2.7.4")
     val room_version = "2.5.2"
     val lifecycle_version = "2.6.2"
     val retrofit_version = "2.9.0"
@@ -60,6 +63,9 @@ dependencies {
     implementation("com.google.dagger:hilt-android:2.48")
     ksp("com.google.dagger:dagger-compiler:2.48")// Dagger compiler
     ksp("com.google.dagger:hilt-compiler:2.48")
+
+
+    implementation("com.facebook.shimmer:shimmer:0.1.0@aar")
 
 
     //Glide

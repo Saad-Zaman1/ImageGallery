@@ -11,6 +11,9 @@ interface FavoriteDao {
     @Insert
     suspend fun addFavorite(favImage: FavoriteEntity)
 
+    @Query("Select * from favorite where id = :id")
+    suspend fun checkFavorite(id: Int): FavoriteEntity
+
     @Query("Select * from favorite")
     fun getFavoriteImages(): LiveData<List<FavoriteEntity>>
 

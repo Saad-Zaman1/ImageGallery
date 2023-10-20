@@ -3,6 +3,7 @@ package com.saad.imagegallary.repository
 import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
+import com.saad.imagegallary.models.CustomFavoriteModel
 import com.saad.imagegallary.models.Hit
 import com.saad.imagegallary.models.ImageList
 import com.saad.imagegallary.retrofit.imageService
@@ -35,7 +36,7 @@ class repository @Inject constructor(
     val favImage: LiveData<FavoriteEntity>
         get() = favImageLiveData
 
-    fun getFav(): LiveData<List<Hit>> {
+    fun getFav(): LiveData<List<CustomFavoriteModel>> {
         return imagesDao.getFav()
     }
 
@@ -78,6 +79,9 @@ class repository @Inject constructor(
         Log.e("Error in flow", it.toString())
     }.flowOn(Dispatchers.IO)
 
+    suspend fun checkFavorite(id: Int): FavoriteEntity {
+        return favoriteDao.checkFavorite(id)
+    }
 
     suspend fun addFavorite(favImage: FavoriteEntity) {
         return favoriteDao.addFavorite(favImage)

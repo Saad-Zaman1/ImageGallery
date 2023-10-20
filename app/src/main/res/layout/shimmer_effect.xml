@@ -1,0 +1,159 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+    <!-- RecyclerView -->
+
+
+    <!--    &lt;!&ndash; Horizontal LinearLayout for Category Items &ndash;&gt;-->
+    <!--    <LinearLayout-->
+    <!--        android:id="@+id/categoryLayout"-->
+    <!--        android:layout_width="wrap_content"-->
+    <!--        android:layout_height="wrap_content"-->
+    <!--        android:layout_marginTop="10dp"-->
+    <!--        android:orientation="horizontal"-->
+    <!--        app:layout_constraintEnd_toEndOf="parent"-->
+    <!--        app:layout_constraintStart_toStartOf="parent"-->
+    <!--        app:layout_constraintTop_toTopOf="parent">-->
+
+    <!--        &lt;!&ndash; Category Items (Add more as needed) &ndash;&gt;-->
+    <!--        <TextView-->
+    <!--            android:id="@+id/category_all"-->
+    <!--            android:layout_width="wrap_content"-->
+    <!--            android:layout_height="wrap_content"-->
+    <!--            android:background="@drawable/category_selected_background"-->
+    <!--            android:clickable="true"-->
+    <!--            android:focusable="true"-->
+    <!--            android:paddingHorizontal="19dp"-->
+    <!--            android:paddingVertical="8dp"-->
+    <!--            android:textColor="@color/black"-->
+    <!--            android:textStyle="bold" />-->
+
+    <!--        <TextView-->
+    <!--            android:id="@+id/category_fashion"-->
+    <!--            android:layout_width="wrap_content"-->
+    <!--            android:layout_height="wrap_content"-->
+    <!--            android:layout_marginStart="8dp"-->
+    <!--            android:background="@drawable/category_selected_background"-->
+    <!--            android:clickable="true"-->
+    <!--            android:focusable="true"-->
+    <!--            android:paddingHorizontal="30dp"-->
+    <!--            android:paddingVertical="8dp" />-->
+
+    <!--        <TextView-->
+    <!--            android:id="@+id/category_nature"-->
+    <!--            android:layout_width="wrap_content"-->
+    <!--            android:layout_height="wrap_content"-->
+    <!--            android:layout_marginStart="8dp"-->
+
+    <!--            android:background="@drawable/category_selected_background"-->
+    <!--            android:clickable="true"-->
+    <!--            android:focusable="true"-->
+    <!--            android:onClick="onCategoryClick"-->
+    <!--            android:paddingHorizontal="30dp"-->
+    <!--            android:paddingVertical="8dp" />-->
+
+    <!--        <TextView-->
+    <!--            android:id="@+id/category_computer"-->
+    <!--            android:layout_width="wrap_content"-->
+    <!--            android:layout_height="wrap_content"-->
+    <!--            android:layout_marginStart="8dp"-->
+    <!--            android:background="@drawable/category_selected_background"-->
+    <!--            android:clickable="true"-->
+    <!--            android:focusable="true"-->
+    <!--            android:onClick="onCategoryClick"-->
+    <!--            android:paddingHorizontal="30dp"-->
+    <!--            android:paddingVertical="8dp" />-->
+    <!--        &lt;!&ndash; Add more categories here &ndash;&gt;-->
+    <!--        <TextView-->
+    <!--            android:id="@+id/category_food"-->
+    <!--            android:layout_width="wrap_content"-->
+    <!--            android:layout_height="wrap_content"-->
+    <!--            android:layout_marginStart="8dp"-->
+    <!--            android:background="@drawable/category_selected_background"-->
+    <!--            android:clickable="true"-->
+    <!--            android:focusable="true"-->
+    <!--            android:onClick="onCategoryClick"-->
+    <!--            android:paddingHorizontal="30dp"-->
+    <!--            android:paddingVertical="8dp" />-->
+
+    <!--        <TextView-->
+    <!--            android:id="@+id/category_business"-->
+    <!--            android:layout_width="wrap_content"-->
+    <!--            android:layout_height="wrap_content"-->
+    <!--            android:layout_marginStart="8dp"-->
+    <!--            android:background="@drawable/category_selected_background"-->
+    <!--            android:clickable="true"-->
+    <!--            android:focusable="true"-->
+    <!--            android:onClick="onCategoryClick"-->
+    <!--            android:paddingHorizontal="30dp"-->
+    <!--            android:paddingVertical="8dp" />-->
+    <!--    </LinearLayout>-->
+
+    <RelativeLayout
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <ImageView
+            android:layout_width="200dp"
+            android:layout_height="250dp"
+            android:layout_marginTop="10dp"
+            android:layout_marginEnd="8dp"
+            android:layout_marginRight="10dp"
+            android:layout_toStartOf="@+id/give"
+            android:background="#DDDDDD" />
+
+        <ImageView
+            android:id="@+id/give"
+            android:layout_width="200dp"
+            android:layout_height="250dp"
+            android:layout_alignParentEnd="true"
+            android:layout_marginTop="10dp"
+            android:layout_marginEnd="-1dp"
+            android:background="#DDDDDD" />
+
+        <ImageView
+            android:id="@+id/givebelow"
+            android:layout_width="500dp"
+            android:layout_height="200dp"
+            android:layout_below="@+id/give"
+            android:layout_alignParentEnd="true"
+            android:layout_marginTop="10dp"
+            android:background="#DDDDDD" />
+
+        <ImageView
+            android:layout_width="200dp"
+            android:layout_height="200dp"
+            android:layout_below="@+id/givebelow"
+            android:layout_marginTop="10dp"
+            android:layout_marginRight="8dp"
+            android:layout_toStartOf="@+id/belowgive"
+            android:background="#DDDDDD" />
+
+        <ImageView
+            android:id="@+id/belowgive"
+            android:layout_width="200dp"
+            android:layout_height="200dp"
+            android:layout_below="@+id/givebelow"
+            android:layout_alignParentEnd="true"
+
+            android:layout_marginTop="10dp"
+            android:background="#DDDDDD" />
+
+        <ImageView
+            android:layout_width="500dp"
+            android:layout_height="200dp"
+            android:layout_below="@+id/belowgive"
+            android:layout_alignParentEnd="true"
+            android:layout_marginTop="10dp"
+            android:background="#DDDDDD" />
+
+    </RelativeLayout>
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>
