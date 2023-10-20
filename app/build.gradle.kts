@@ -66,7 +66,7 @@ dependencies {
 
 
     implementation("com.facebook.shimmer:shimmer:0.1.0@aar")
-
+    implementation("com.github.chrisbanes:PhotoView:2.3.0")
 
     //Glide
     implementation("com.github.bumptech.glide:glide:4.14.0")
